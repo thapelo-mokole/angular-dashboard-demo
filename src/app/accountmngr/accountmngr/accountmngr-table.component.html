@@ -1,0 +1,63 @@
+<div class="mat-elevation-z8">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <h3>Account Manager</h3>
+      <span class="example-spacer"></span>
+      <button mat-mini-fab color="accent" (click)="openDialog(element);" class="btn-add">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- Position Column -->
+    <ng-container matColumnDef="AcctMngr">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="make-gold"> ACCTMNGR </th>
+      <td mat-cell *matCellDef="let element"> {{element.AcctMngr}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Active">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ACTIVE </th>
+      <td mat-cell *matCellDef="let element"> {{element.Active}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="AcctMngrInitials">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ACCTMNGRINITIONS </th>
+      <td mat-cell *matCellDef="let element"> {{element.AcctMngrInitials}} </td>
+    </ng-container>
+
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="CreateDate"  >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> CREATEDATE </th>
+      <td mat-cell *matCellDef="let element"> {{element.CreateDate | date:'MM/dd/yyyy hh:mm:ss aa'}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="UserID">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> USERID </th>
+      <td mat-cell *matCellDef="let element"> {{element.UserID}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="OpManager">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> OPMANAGER </th>
+        <td mat-cell *matCellDef="let element"> {{element.OpManager}} </td>
+    </ng-container>
+
+    <!-- View Column -->
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element"> <button mat-mini-fab color="primary" (click)="openDialog(element);" >
+          <!-- (click)="openDialog(element);" -->
+          <mat-icon>edit</mat-icon>
+        </button> </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class=""></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 5, 20]" showFirstLastButtons></mat-paginator>
+</div>

@@ -1,0 +1,58 @@
+<style type="text/css">
+  .dialog {
+    width: 86%;
+  }
+
+  .dialog-container {
+    overflow: hidden;
+  }
+</style>
+<h2 mat-dialog-title>{{dialogTitle}}</h2>
+<p *ngIf="saveUpdateFlag == 'delete'">Are you sure you want to delete <b>{{privatesku}} </b> this? </p>
+<div mat-dialog-actions align="end" class="pad" *ngIf="saveUpdateFlag == 'delete'">
+  <button mat-raised-button color="secondary" *ngIf="saveUpdateFlag == 'delete'" (click)="deleteRow();">Delete</button>
+  <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+</div>
+<form [formGroup]="ownerForm" autocomplete="off" novalidate (ngSubmit)="createOwner(ownerForm.value)"
+  enctype="multipart/form-data" fxLayout="column wrap" fxLayoutGap="10px">
+  <div mat-dialog-content class="dialog-container">
+    <mat-form-field class="dialog" *ngIf="saveUpdateFlag != 'delete'">
+      <input matInput placeholder="NAME" formControlName="NAME" id="NAME">
+      <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+      <mat-error *ngIf="hasError('NAME', 'required')">NAME is required</mat-error>
+      <mat-error *ngIf="hasError('NAME', 'maxlength')">You have more than 100 characters</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="dialog" *ngIf="saveUpdateFlag != 'delete'">
+      <input matInput placeholder="SKUNAME" formControlName="SKUNAME" id="SKUNAME">
+      <mat-hint align="end">Not more then 2 characters long.</mat-hint>
+      <mat-error *ngIf="hasError('SKUNAME', 'required')">SKU is required</mat-error>
+      <mat-error *ngIf="hasError('SKUNAME', 'maxlength')">You have more than 2 characters</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="dialog" *ngIf="saveUpdateFlag != 'delete'">
+      <input matInput placeholder="IMAGE_URL" formControlName="IMAGE_URL" id="IMAGE_URL">
+    </mat-form-field>
+
+    <mat-form-field class="dialog" *ngIf="saveUpdateFlag != 'delete'">
+      <input matInput placeholder="PATH" formControlName="PATH" id="PATH">
+    </mat-form-field>
+
+
+    <input type="file" (change)="onFileSelected($event)" formControlName="FILE" accept=".xls,.xlsx"
+      *ngIf="saveUpdateFlag != 'delete'">
+    <!-- <mat-error *ngIf="hasError('FILE', 'required')"  *ngIf="saveUpdateFlag != 'delete'">Select excle file</mat-error> -->
+
+  </div>
+
+  <div mat-dialog-actions align="end" class="pad">
+    <button mat-raised-button color="primary" [disabled]="!ownerForm.valid"
+      *ngIf="saveUpdateFlag == 'insert'">Create</button>
+    <button mat-raised-button color="primary" [disabled]="!ownerForm.valid"
+      *ngIf="saveUpdateFlag == 'update'">Update</button>
+    <button mat-raised-button color="warn" (click)="onNoClick()" *ngIf="saveUpdateFlag != 'delete'">Cancel</button>
+  </div>
+
+
+
+</form>

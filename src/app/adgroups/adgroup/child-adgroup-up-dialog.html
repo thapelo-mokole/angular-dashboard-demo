@@ -1,0 +1,51 @@
+<style type="text/css">
+    .dialog {
+        width: 86%;
+    }
+</style>
+<h1>{{dialogTitle}}</h1>
+<p *ngIf="saveUpdateFlag == 'delete'">Are you sure you want to delete this?</p>
+<form [formGroup]="ownerForm" autocomplete="off" novalidate (ngSubmit)="createOwner(ownerForm.value)"
+    fxLayout="column wrap" fxLayoutGap="10px">
+
+    <!-- update div-->
+    <div mat-dialog-content *ngIf="saveUpdateFlag == 'update'">
+        <mat-form-field class="dialog">
+            <!-- [(ngModel)]="CustNbr"  -->
+            <input matInput placeholder="Value" formControlName="KeyVALUE" id="VALUE">
+            <input matInput hidden="true" placeholder="Value" formControlName="ID" id="ID">
+            <input matInput hidden="true" placeholder="Value" formControlName="MAINID" id="MAINID">
+        </mat-form-field>
+    </div>
+
+    <!-- insert div-->
+    <div mat-dialog-content *ngIf="saveUpdateFlag == 'insert'">
+        <input matInput hidden="true" placeholder="Value" formControlName="MAINID" id="MAINID">
+        <mat-form-field class="dialog">
+            <input matInput placeholder="NO" formControlName="NO" id="NO">
+            <!-- <mat-error *ngIf="hasError('NO', 'required')">NO is required</mat-error> -->
+        </mat-form-field>
+
+        <mat-form-field class="dialog">
+            <input matInput placeholder="KEY" formControlName="KEY" id="KEY">
+            <!-- <mat-error *ngIf="hasError('KEY', 'required')">KEY is required</mat-error> -->
+        </mat-form-field>
+
+        <mat-form-field class="dialog">
+            <input matInput placeholder="Value" formControlName="KeyVALUE" id="VALUE">
+            <!-- <mat-error *ngIf="hasError('Value', 'required')">Value is required</mat-error> -->
+        </mat-form-field>
+    </div>
+
+
+    <div mat-dialog-actions align="end">
+        <button mat-raised-button color="primary" [disabled]="!ownerForm.valid"
+            *ngIf="saveUpdateFlag == 'insert'">Create</button>
+        <button mat-raised-button color="primary" [disabled]="!ownerForm.valid"
+            *ngIf="saveUpdateFlag == 'update'">Update</button>
+        <button mat-raised-button color="primary" [disabled]="!ownerForm.valid"
+            *ngIf="saveUpdateFlag == 'delete'">Delete</button>
+        <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+    </div>
+    
+</form>

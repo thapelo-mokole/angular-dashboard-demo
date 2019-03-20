@@ -1,0 +1,65 @@
+<div class="mat-elevation-z8">
+  <mat-toolbar color="primary">
+      <mat-toolbar-row>
+         <h3>Customer Workflow</h3>
+         <span class="example-spacer"></span>
+         <button mat-mini-fab color="accent" (click)="openDialog(element);" class="btn-add"><mat-icon>add</mat-icon></button>
+       </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput placeholder="Customer Name" [(ngModel)]="searchCustname">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Account Manager" [(ngModel)]="searchAcctname">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="searchData();">Search</button>
+    <button mat-raised-button color="primary" (click)="resetData()">Reset</button>
+  </div>
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- Position Column -->
+    
+    <!-- 'CustNbr', 'CustomerName', 'EMAILGROUP', 'GROUPMEMBERS', 'ACCTMNGR','update' -->
+    <ng-container matColumnDef="CustNbr">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> CustNbr </th>
+      <td mat-cell *matCellDef="let element"> {{element.CustNbr}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="CustomerName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> CustomerName </th>
+      <td mat-cell *matCellDef="let element"> {{element.CustomerName}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="EMAILGROUP">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> EMAILGROUP </th>
+      <td mat-cell *matCellDef="let element"> {{element.EMAILGROUP}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="GROUPMEMBERS">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> GROUPMEMBERS </th>
+      <td mat-cell *matCellDef="let element"> {{element.GROUPMEMBERS}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="ACCTMNGR">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ACCTMNGR </th>
+      <td mat-cell *matCellDef="let element"> {{element.ACCTMNGR}} </td>
+    </ng-container>
+
+    <!-- View Column -->
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-mini-fab color="primary" (click)="openDialog(element);">
+          <mat-icon>edit</mat-icon>
+        </button> 
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 5, 20]" showFirstLastButtons></mat-paginator>
+</div>

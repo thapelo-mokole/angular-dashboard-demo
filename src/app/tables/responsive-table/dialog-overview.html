@@ -1,0 +1,20 @@
+<h4 mat-dialog-title>View</h4>
+<!-- {{data.name}} -->
+<div mat-dialog-content class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="First Name"  [(ngModel)]="data.position" disabled>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Last Name" [(ngModel)]="data.name" disabled>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Employee Code" [(ngModel)]="data.weight" disabled>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Employee Position" [(ngModel)]="data.symbol" disabled>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <!-- <button mat-button (click)="onNoClick()">No Thanks</button> -->
+  <!-- <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button> -->
+</div>

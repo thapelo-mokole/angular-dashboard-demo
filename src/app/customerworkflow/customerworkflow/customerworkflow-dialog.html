@@ -1,0 +1,46 @@
+<style type="text/css">
+  .dialog {
+    width: 86%;
+  }
+</style>
+<h2 mat-dialog-title>{{dialogTitle}}</h2>
+<form [formGroup]="ownerForm" autocomplete="off" novalidate (ngSubmit)="createOwner(ownerForm.value)"
+  fxLayout="column wrap" fxLayoutGap="10px">
+  <div mat-dialog-content>
+
+    <mat-form-field class="dialog">
+      <!-- [(ngModel)]="CustNbr"  -->
+      <input matInput placeholder="CustNbr" formControlName="CustNbr" id="CustNbr">
+      <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+      <mat-error *ngIf="hasError('CustNbr', 'required')">CustNbr is required</mat-error>
+      <mat-error *ngIf="hasError('CustNbr', 'maxlength')">You have more than 100 characters</mat-error>
+    </mat-form-field>
+    <mat-form-field class="dialog">
+      <input matInput placeholder="CustomerName" formControlName="CustomerName" id="CustomerName">
+      <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+      <mat-error *ngIf="hasError('CustomerName', 'required')">CustomerName is required</mat-error>
+      <mat-error *ngIf="hasError('CustomerName', 'maxlength')">You have more than 100 characters</mat-error>
+    </mat-form-field>
+  <mat-form-field class="dialog">
+    <input matInput placeholder="EMAILGROUP" formControlName="EMAILGROUP" id="EMAILGROUP">
+  </mat-form-field>
+  <mat-form-field class="dialog">
+    <input matInput placeholder="GROUPMEMBERS" formControlName="GROUPMEMBERS" id="GROUPMEMBERS">
+  </mat-form-field>
+  <mat-form-field class="dialog">
+    <mat-select placeholder="AccountMngr" formControlName="ACCTMNGR">
+      <mat-option *ngFor="let accountmngr of accountmngrList" [value]="accountmngr.AcctMngr">
+        {{accountmngr.AcctMngr}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="hasError('ACCTMNGR', 'required')">Please choose an ACCTMNGR</mat-error>
+  </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" [disabled]="!ownerForm.valid" *ngIf = "saveUpdateFlag == false">Create</button>
+    <button mat-raised-button color="primary" [disabled]="!ownerForm.valid" *ngIf = "saveUpdateFlag == true">Update</button>
+    <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+    <!-- <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button> -->
+  </div>
+</form>

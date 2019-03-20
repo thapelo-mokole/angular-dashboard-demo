@@ -1,0 +1,152 @@
+<div class="mat-elevation-z8">
+	<mat-toolbar color="primary">
+		<mat-toolbar-row>
+			<h2>Active Directory Groups</h2>
+			<span class="example-spacer"></span>
+			<button mat-mini-fab color="accent" (click)="openDialog(element,1)">
+				<mat-icon>add</mat-icon>
+			</button>
+		</mat-toolbar-row>
+	</mat-toolbar>
+	<!-- ['NAME', 'SKUNAME', 'ISACTIVE','U_DATE','ACTION']; -->
+	<div class="example-container">
+		<mat-form-field>
+			<input matInput placeholder="Search" [(ngModel)]="searchSKUNAME" (keyup)="doFilter($event.target.value)">
+		</mat-form-field>
+
+		<button mat-raised-button color="primary" (click)="resetData()">Reset</button>
+	</div>
+	<table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+		<ng-container matColumnDef="details">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+			<mat-cell *matCellDef="let element" (click)="toggleview(element)">
+				<span *ngIf="expandedElement && expandedElement === element; else plusIcon"
+					class="expand-icon">&#9650;</span>
+				<ng-template #plusIcon><span class="expand-icon">&#9660;</span></ng-template>
+			</mat-cell>
+		</ng-container>
+
+		<!-- ISACTIVE Column -->
+		<ng-container matColumnDef="ISACTIVE">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> ISACTIVE </mat-header-cell>
+			<mat-cell *matCellDef="let element; let i = index;" (click)="isActiveToggle(element,i)">
+				<mat-checkbox [checked]="element.ISACTIVE"></mat-checkbox>
+			</mat-cell>
+		</ng-container>
+
+		<!-- IMAGE Column -->
+		<ng-container matColumnDef="IMAGE">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> IMAGE </mat-header-cell>
+			<mat-cell *matCellDef="let element;">
+				<img class="image" src="{{element.IMAGE_URL || './../../../../assets/images/avatars/hari.jpg'}}"
+					(click)="OpenWebsite(element,i)">
+			</mat-cell>
+		</ng-container>
+
+		<!-- NAME Column -->
+		<ng-container matColumnDef="NAME">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> NAME </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.NAME}} </mat-cell>
+		</ng-container>
+
+		<!-- SKUNAME Column -->
+		<ng-container matColumnDef="SKUNAME">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> SKUNAME </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.SKUNAME}} </mat-cell>
+		</ng-container>
+
+		<!-- DATE Column -->
+		<ng-container matColumnDef="DATE">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> DATE </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.U_DATE | date}} </mat-cell>
+		</ng-container>
+
+		<!-- ACTION Column -->
+		<ng-container matColumnDef="ACTION">
+			<mat-header-cell *matHeaderCellDef> ACTION </mat-header-cell>
+
+			<mat-cell *matCellDef="let element" class="tableendrow">
+				<button mat-mini-fab color="primary" class="editbtn" (click)="openDialog(element,2);">
+					<mat-icon>edit</mat-icon>
+				</button>
+				<button mat-mini-fab color="warn" class="editbtn" (click)="openDialog(element,3);">
+					<mat-icon>delete</mat-icon>
+				</button>
+			</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="DOWNLOADFILE">
+			<mat-header-cell *matHeaderCellDef> DOWNLOADFILE </mat-header-cell>
+			<mat-cell *matCellDef="let element; let i = index;" class="tableendrow">
+				<button mat-mini-fab color="primary" class="downloadbtn" (click)="ondownload(element, i);">
+					<mat-icon>get_app</mat-icon>
+				</button>
+			</mat-cell>
+		</ng-container>
+
+		<!-- //=================================================================================================================== -->
+
+		<ng-container matColumnDef="expandedDetail">
+			<mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+				<mat-table [dataSource]="dataSource2" class="detail-table">
+					<ng-container matColumnDef="select">
+						<mat-header-cell *matHeaderCellDef>
+							<mat-checkbox (change)="$event ? masterToggle() : null"
+								[checked]="selection.hasValue() && isAllSelected()"
+								[indeterminate]="selection.hasValue() && !isAllSelected()">
+							</mat-checkbox>
+						</mat-header-cell>
+						<mat-cell *matCellDef="let row">
+							<mat-checkbox (click)="$event.stopPropagation()"
+								(change)="$event ? selection.toggle(row) : null"  (change)="$event ? selectRow($event, row) : null" [checked]="selection.isSelected(row)">
+							</mat-checkbox>
+						</mat-cell>
+					</ng-container>
+
+					<ng-container matColumnDef="SEQUENCE">
+						<mat-header-cell *matHeaderCellDef>SEQUENCE</mat-header-cell>
+						<mat-cell *matCellDef="let element"> {{element.NO}} </mat-cell>
+					</ng-container>
+					<ng-container matColumnDef="KEY">
+						<mat-header-cell *matHeaderCellDef>KEY</mat-header-cell>
+						<mat-cell *matCellDef="let element"> {{element.KEY}} </mat-cell>
+					</ng-container>
+					<ng-container matColumnDef="VALUE">
+						<mat-header-cell *matHeaderCellDef>VALUE</mat-header-cell>
+						<mat-cell *matCellDef="let element"> {{element.VALUE}} </mat-cell>
+					</ng-container>
+					<ng-container matColumnDef="ACTION">
+						<mat-header-cell *matHeaderCellDef> ACTION &nbsp; &nbsp;
+							<button mat-mini-fab color="accent" (click)="openchildDialog(row, 0 ,element._id)">
+							<mat-icon>add</mat-icon>
+						    </button>
+					</mat-header-cell>
+						<mat-cell *matCellDef="let row" class="tableendrow">
+							<button mat-mini-fab color="primary" class="editbtn" (click)="openchildDialog(row, 1 ,element._id);">
+								<mat-icon>edit</mat-icon>
+							</button>
+							<button mat-mini-fab color="warn" class="editbtn" (click)="openchildDialog(row, 2 ,element._id);">
+								<mat-icon>delete</mat-icon>
+							</button>
+						</mat-cell>
+					</ng-container>
+					<mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+					<mat-row *matRowDef="let element; columns: columnsToDisplay;"  (click)="selection.toggle(element)"></mat-row>
+				</mat-table>
+			</mat-cell>
+		</ng-container>
+
+		<!-- //========================================================================================================================== -->
+
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+			[class.expanded]="expandedElement === element"> </mat-row>
+		<mat-row *matRowDef="let row; columns: ['expandedDetail'];"
+			[@detailExpand]="row == expandedElement ? 'expanded' : 'collapsed'" style="overflow: hidden"
+			class="example-detail-row"></mat-row>
+
+	</table>
+
+	<mat-paginator [pageSizeOptions]="[10, 5, 20]" showFirstLastButtons></mat-paginator>
+
+</div>

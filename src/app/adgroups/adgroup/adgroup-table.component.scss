@@ -1,0 +1,208 @@
+// .table-header {
+//     background-color: #327ebd;
+//     color: white;
+//     padding: 0 5px;
+// }
+// .table-container {
+//     padding: 5px 15px 15px 15px;
+// }
+// .table-component-holder {
+//     border: 1px solid #327ebd;
+//     background-color: white;
+// }
+
+// table {
+//     border: 1px solid #ccc;
+//     border-collapse: collapse;
+//     margin: 0;
+//     padding: 0;
+//     width: 100%;
+//     table-layout: fixed;
+// }
+// table caption {
+//     font-size: 1.5em;
+//     margin: .5em 0 .75em;
+//     font-family:Roboto,"Helvetica Neue",sans-serif;
+// }
+// table tr {
+//     background: #f8f8f8;
+//     border: 1px solid #ddd;
+//     padding: .35em;
+    
+// }
+// table tr:nth-child(odd) td{
+//     font-family:Roboto,"Helvetica Neue",sans-serif;
+//   }
+// table tr:nth-child(even) td{
+//     background:rgba(145, 151, 187, 0.34);
+//     font-family:Roboto,"Helvetica Neue",sans-serif;
+// }
+// /deep/ .mat-sort-header-container{
+//         justify-content: center;
+// }
+
+// table th,
+// table td {
+//     padding: .625em;
+//     text-align: center;
+//     font-family:Roboto,"Helvetica Neue",sans-serif;
+// }
+// table th {
+//     background:#cfcfcf;
+//     font-size: .85em;
+//     letter-spacing: .1em;
+//     text-transform: uppercase;
+//     font-weight: bold;
+// }
+// @media screen and (max-width: 600px) {
+//     table {
+//          border: 0;
+//     }
+//     table caption {
+//         font-size: 1.3em;
+//     }
+//     table thead {
+//         border: none;
+//         clip: rect(0 0 0 0);
+//         height: 1px;
+//         margin: -1px;
+//         overflow: hidden;
+//         padding: 0;
+//         position: absolute;
+//         width: 1px;
+//     }
+//     table tr {
+//         border-bottom: 3px solid #ddd;
+//         display: block;
+//         margin-bottom: .625em;
+//     }
+//     table td {
+//         border-bottom: 1px solid #ddd;
+//         display: block;
+//         font-size: .8em;
+//         text-align: right;
+//     }
+//     table td:before {
+//         /*
+//         * aria-label has no advantage, it won't be read inside a table
+//         content: attr(aria-label);
+//         */
+//         content: attr(data-label);
+//         float: left;
+//         font-weight: bold;
+//         text-transform: uppercase;
+//     }
+//     table td:last-child {
+//         border-bottom: 0;
+//     }
+    
+// }
+// mat-button-toggle-group{
+//     cursor:pointer;
+// }
+
+// ::ng-deep .mat-sort-header-container{
+//     justify-content: center;
+    
+// }
+
+// .table-header-button {
+//     font-weight: 900;
+//     text-transform: uppercase;
+// }
+
+/* Structure */
+// .example-container {
+//   display: flex;
+//   flex-direction: column;
+//   min-width: 300px;
+// }
+table{
+  width: 100%;
+}
+.example-header {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  font-size: 20px;
+}
+
+.example-container .mat-table{
+  border: 1px solid #ccc;
+}
+
+.mat-table {
+  border: 1px solid #ddd;
+}
+
+.widgetHolder{
+  margin: 0 auto;
+  .widgetHolder-content {
+    padding: 20px;
+  }
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  .mat-elevation-z8 .example-container {
+    width: 100%;
+    float: left;
+    padding: 0;
+}
+.mat-form-field {
+    float: left;
+    width: 26.33%;
+    clear: none;
+    padding: 0 20px;
+}
+.mat-elevation-z8 .example-container {
+    display: inline-block !important;
+}
+h3 {
+    margin: 10px 10px 10px 10px;
+    padding: 20px 10px 10px 20px;
+} 
+.example-container button {
+    margin: 13px 5px;
+}
+
+.example-icon {
+    padding: 0 14px;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .success-snackbar {
+      background-color: #1DE9B6 !important;
+  } 
+
+  .pad {
+    padding: 0 14px;
+  }
+  .image{
+      width: 50px;
+      height: 50px;
+      border-radius:25%;
+  }
+
+ .editbtn {
+     margin-right: 5%;
+ }
+
+ .detail-table {display: flex;flex-direction: column;display: block;margin: 10px;width: 100%;}
+ .expand-icon {color: rgba(0,0,0,.44);font-size: 12px; margin-right: 5px; cursor: pointer;}
+
+ .editbtn{
+  margin-right: 5%; 
+ }
+    

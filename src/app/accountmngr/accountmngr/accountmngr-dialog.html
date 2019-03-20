@@ -1,0 +1,52 @@
+<style type="text/css">
+  .dialog {
+    width: 86%;
+  }
+</style>
+<h2 mat-dialog-title>{{dialogTitle}}</h2>
+<form [formGroup]="ownerForm" autocomplete="off" novalidate (ngSubmit)="createOwner(ownerForm.value)"
+  fxLayout="column wrap" fxLayoutGap="10px">
+  <div mat-dialog-content>
+    
+    <mat-form-field class="dialog">
+      <!-- [(ngModel)]="CustNbr"  -->
+      <input matInput placeholder="AcctMngr" formControlName="AcctMngr" id="AcctMngr" *ngIf = "saveUpdateFlag == false">
+      <input matInput placeholder="AcctMngr" formControlName="AcctMngr" id="AcctMngr" *ngIf = "saveUpdateFlag == true" > 
+      <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+      <mat-error *ngIf="hasError('AcctMngr', 'required')">AcctMngr is required</mat-error>
+      <mat-error *ngIf="hasError('AcctMngr', 'maxlength')">You have more than 100 characters</mat-error>
+    </mat-form-field>
+    
+  <mat-form-field class="dialog">
+    <input matInput placeholder="AcctMngrInitials" formControlName="AcctMngrInitials" id="AcctMngrInitials">
+    <mat-hint align="end">Not more then 2 characters long.</mat-hint>
+    <mat-error *ngIf="hasError('AcctMngrInitials', 'maxlength')">You have more than 2 characters</mat-error>
+  </mat-form-field>
+   <mat-form-field class="dialog">
+        <mat-select  placeholder="Active" formControlName="Active">
+        <mat-option *ngFor="let active of actives" [value]="active.id">
+            {{active.value}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="dialog">
+        <mat-select placeholder="OpManager" formControlName="OPMANAGER">
+          <mat-option>Not Set</mat-option>
+          <mat-option *ngFor="let opmngr of opmngrList" [value]="opmngr.OpManager">
+            {{opmngr.OpManager}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" [disabled]="!ownerForm.valid" *ngIf = "saveUpdateFlag == false">Create</button>
+    <button mat-raised-button color="primary" [disabled]="!ownerForm.valid" *ngIf = "saveUpdateFlag == true">Update</button>
+    <!-- <button mat-button mat-dialog-close>Cancel</button> -->
+    <span class="spacer"></span>
+    <button mat-raised-button color="warn" (click)="onNoClick()" mat-dialog-close>Cancel</button>
+  </div>
+  <!-- <div mat-dialog-actions align="center" *ngIf = "saveUpdateFlag == true">
+      <button mat-raised-button color="primary" [disabled]="!ownerForm.valid">Update</button>
+      <button mat-raised-button color="warn" (click)="onCloseNoClick()">Close</button>
+  </div> -->
+</form>
